@@ -2,6 +2,7 @@
 
 int main(){
 	printf("Simple Computer");
-system ("PAUSE");
+	char c;
+	scanf("%c", &c);
 return 0;
 }
