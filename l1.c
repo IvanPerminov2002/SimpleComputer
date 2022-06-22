@@ -49,32 +49,52 @@ int sc_memoryLoad(char* filename){
 
 //инициализирует регистр флагов нулевым значением
 int sc_regInit(void){
-
+    flag = 0;
+    return 0;
 }
 
 //устанавливает значение указанного регистра флагов. для номеров регистров флагов должны 
 //использоваться маски, задаваемые макросами №дефайн
 //если указан недопустимый номер регистра функция завершается с ошибкой
 int sc_regSet(int regist, int value){
-
+    if(regist > 0 && regist < 6){
+        if(value == 1){
+            flag = flag | (1 << (regist-1));
+            return 0;
+        }
+        else if(value == 0){
+            flag = flag & (~(1 << (regist-1)));
+            return 0;
+        }
+    }
+    else return 1;
 }
 
 //возвращает значение указанного флага
 
 int sc_regGet(int regist, int * value){
-
+    if(regist > 0 && regist < 6){
+        *value = (flag >> (regist-1) & 0x1);
+        return 0;
+    }
+    else return 1;
 }
 
 //кодирует команду с указанным номером и операндом и помещает результат в валуе. Если указаны
 // неправельные значения, то функция завершается с ошибкой, валуе не изменяется
 int sc_commandEncode(int command, int operand, int *value){
-
+    //if((command < 0 || command > 127) || (operand < 0 || operand > 127)
+   // *value = ((command << 7) | operand));
+    //return 0;
 }
 
 //декодирует значение как команду симплкомпьютер . если декодирование невозможено, устанавливается
 // флаг "ошибочная команда" и функция завершается с ошибкой
-int sc_commandDecode(int value, int * comand, int *operand){
-
+int sc_commandDecode(int value, int * command, int *operand){
+    if(value >> 14) return 1;
+    *command = value >> 7;
+    *operand = value & 0x7f;
+    return 0;
 }
 
 

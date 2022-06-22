@@ -12,9 +12,9 @@ int sc_memoryLoad(char* filename);
 
 int sc_regInit(void);
 
-int sc_regSet(int register, int value);
+int sc_regSet(int regist, int value);
 
-int sc_regGet(int register, int * value);
+int sc_regGet(int regist, int * value);
 
 int sc_commandEncode(int command, int operand, int *value);
 
